@@ -1,0 +1,24 @@
+service: bear-store
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  profile: default
+  memorySize: 256
+  region: eu-central-1
+
+custom:
+  webpackIncludeModules: true
+
+functions:
+  hello:
+    handler: src/functions/index.hello
+    events:
+      - http:
+          path: hello
+          method: get
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+

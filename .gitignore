@@ -1,0 +1,7 @@
+node_modules
+.env
+.idea
+.webpack
+.serverless
+.env*
+yarn-error.log
