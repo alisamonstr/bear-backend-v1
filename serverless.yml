@@ -29,6 +29,13 @@ functions:
           path: hello
           method: get
 
+  bears:
+    handler: src/functions/index.getBears
+    events:
+      - http:
+         path: bears
+         method: get
+
 plugins:
   - serverless-webpack
   - serverless-offline
