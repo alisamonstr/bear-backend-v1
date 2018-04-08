@@ -1,4 +1,4 @@
-function lambdaResponse({ json, statusCode, allowCORS = false }) {
+function lambdaResponse({ json, statusCode, allowCORS = true }) {
   const response = {
     statusCode,
     body: JSON.stringify(json),
