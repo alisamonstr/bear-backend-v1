@@ -6,6 +6,10 @@ provider:
   profile: default
   memorySize: 256
   region: eu-central-1
+  environment:
+    SECRET: ${env:SECRET, file(./config.json):SECRET}
+    EMAIL: ${env:EMAIL, file(./config.json):EMAIL}
+    PASSWORD: ${env:PASSWORD, file(./config.json):PASSWORD}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -22,13 +26,6 @@ custom:
   webpackIncludeModules: true
 
 functions:
-  hello:
-    handler: src/functions/index.hello
-    events:
-      - http:
-          path: hello
-          method: get
-
   bears:
     handler: src/functions/index.getBears
     events:
@@ -36,6 +33,20 @@ functions:
          path: bears
          method: get
          cors: true
+
+  express:
+    handler:  src/functions/index.handlerExpress
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+      - http:
+          path: /login
+          method: post
+      - http:
+          path: /protected
+          method: get
 
 plugins:
   - serverless-webpack

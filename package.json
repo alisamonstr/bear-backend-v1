@@ -1,11 +1,10 @@
 {
-  "name": "serverless-vk",
+  "name": "bears-backend",
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "deploy": "sls deploy",
-    "deploy-function": "sls deploy --function hello",
-    "serve": "sls offline start",
+    "start": "sls offline start",
     "lint": "eslint ./src",
     "test": "jest",
     "precommit": "lint-staged",
@@ -30,7 +29,7 @@
     "husky": "^0.14.3",
     "jest": "^22.0.4",
     "lint-staged": "^6.0.0",
-    "serverless": "^1.5.1",
+    "serverless": "^1.32.0",
     "serverless-offline": "^3.16.0",
     "serverless-webpack": "^4.2.0",
     "webpack": "^3.6.0",
@@ -38,8 +37,14 @@
   },
   "dependencies": {
     "aws-sdk": "^2.213.1",
+    "aws-serverless-express": "^3.3.5",
     "babel-runtime": "^6.22.0",
-    "lodash": "^4.17.5"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.5",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
   },
   "lint-staged": {
     "src/**/*.js": [
