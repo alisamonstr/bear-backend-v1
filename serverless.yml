@@ -3,7 +3,6 @@ service: bear-store
 provider:
   name: aws
   runtime: nodejs8.10
-  profile: default
   memorySize: 256
   region: eu-central-1
   environment:
