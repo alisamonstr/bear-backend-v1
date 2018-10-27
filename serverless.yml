@@ -4,6 +4,7 @@ provider:
   name: aws
   runtime: nodejs8.10
   memorySize: 256
+  stage: prod
   region: eu-central-1
   environment:
     SECRET: ${env:SECRET, file(./config.json):SECRET}

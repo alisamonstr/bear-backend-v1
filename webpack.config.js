@@ -1,16 +1,38 @@
-const nodeExternals = require('webpack-node-externals');
+const path = require('path')
 const slsw = require('serverless-webpack')
 
 module.exports = {
   entry: slsw.lib.entries,
+  mode: 'development',
   target: 'node',
-  externals: [nodeExternals()],
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel-loader'],
-      include: __dirname,
-      exclude: /node_modules/,
-    }],
+  resolve: {
+    extensions: [
+      '.js',
+      '.json',
+      '.ts',
+      '.tsx',
+    ],
   },
-};
+  output: {
+    libraryTarget: 'commonjs',
+    path: path.join(__dirname, '.webpack'),
+    filename: '[name].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js(x?)$/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ],
+      },
+      {
+        type: 'javascript/auto',
+        test: /\.mjs$/,
+        use: [],
+      },
+    ],
+  },
+}
