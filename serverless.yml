@@ -40,7 +40,19 @@ functions:
       - http:
           path: /
           method: get
-          cors: true
+          cors:
+            origin: '*'
+            headers:
+            - Content-Type
+            - X-Amz-Date
+            - Authorization
+            - X-Api-Key
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+            - Startlower
+            - Text
+            - Access-Control-Allow-Headers
+            - Access-Control-Allow-Origin
       - http:
           path: /login
           method: post
