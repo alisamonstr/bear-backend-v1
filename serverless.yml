@@ -24,6 +24,9 @@ provider:
 
 custom:
   webpackIncludeModules: true
+  serverless-offline:
+    port: 4000
+    noTimeout: true
 
 functions:
   bears:
