@@ -1,13 +1,13 @@
-const awsServerlessExpress = require('aws-serverless-express')
-const express = require('express')
-const bodyParser = require('body-parser')
+import awsServerlessExpress from 'aws-serverless-express'
+import express from 'express'
+import bodyParser from 'body-parser'
+import jwt from 'jsonwebtoken'
+import passport from 'passport'
+
+import jwtStrategry from '../utils/jwt'
+import { getBears } from './bears'
 
 const app = express()
-
-const jwt = require('jsonwebtoken')
-
-const passport = require('passport')
-const jwtStrategry = require('../utils/jwt')
 
 passport.use(jwtStrategry)
 
@@ -21,6 +21,11 @@ app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
   res.send('hello express server')
+})
+
+app.get('/bears', async (req, res) => {
+  const bears = await getBears()
+  res.send(bears)
 })
 
 app.post('/login', (req, res) => {

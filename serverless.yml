@@ -10,6 +10,7 @@ provider:
     SECRET: ${env:SECRET, file(./config.json):SECRET}
     EMAIL: ${env:EMAIL, file(./config.json):EMAIL}
     PASSWORD: ${env:PASSWORD, file(./config.json):PASSWORD}
+    region: eu-central-1
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -29,39 +30,41 @@ custom:
     noTimeout: true
 
 functions:
-  bears:
-    handler: src/functions/index.getBears
-    events:
-      - http:
-         path: bears
-         method: get
-         cors: true
-
   express:
     handler:  src/functions/index.handlerExpress
     events:
-      - http:
-          path: /
-          method: get
-          cors:
-            origin: '*'
-            headers:
-            - Content-Type
-            - X-Amz-Date
-            - Authorization
-            - X-Api-Key
-            - X-Amz-Security-Token
-            - X-Amz-User-Agent
-            - Startlower
-            - Text
-            - Access-Control-Allow-Headers
-            - Access-Control-Allow-Origin
-      - http:
-          path: /login
-          method: post
-      - http:
-          path: /protected
-          method: get
+    - http:
+        path: /
+        method: any
+        cors:
+          origin: '*'
+          headers:
+          - Content-Type
+          - X-Amz-Date
+          - Authorization
+          - X-Api-Key
+          - X-Amz-Security-Token
+          - X-Amz-User-Agent
+          - Startlower
+          - Text
+          - Access-Control-Allow-Headers
+          - Access-Control-Allow-Origin
+    - http:
+        path: /{any+}
+        method: any
+        cors:
+          origin: '*'
+          headers:
+          - Content-Type
+          - X-Amz-Date
+          - Authorization
+          - X-Api-Key
+          - X-Amz-Security-Token
+          - X-Amz-User-Agent
+          - Startlower
+          - Text
+          - Access-Control-Allow-Headers
+          - Access-Control-Allow-Origin
 
 plugins:
   - serverless-webpack

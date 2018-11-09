@@ -1,12 +1,12 @@
-import AWS from 'aws-sdk'
-import { successResponse } from '../utils/'
+import { DynamoDB } from 'aws-sdk'
 
-const documentClient = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10', region: 'eu-central-1' })
+const documentClient = new DynamoDB.DocumentClient({
+  apiVersion: '2012-08-10',
+  region: process.env.region,
+  service: new DynamoDB({ apiVersion: '2012-08-10', region: process.env.region }),
+})
 
-export const getBears = async (event, context, callback) => {
+export const getBears = async () => {
   const result = await documentClient.scan({ TableName: 'bears-store' }).promise()
-  console.log(JSON.stringify(result.Items))
-
-  const response = successResponse(result.Items)
-  callback(null, response)
+  return result.Items || []
 }
