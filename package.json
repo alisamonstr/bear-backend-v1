@@ -6,7 +6,7 @@
     "deploy": "sls deploy",
     "deploy-function": "sls deploy function --function express --verbose",
     "start": "sls offline start",
-    "lint": "eslint ./src",
+    "lint": "eslint ./src --fix",
     "test": "jest",
     "precommit": "lint-staged",
     "logs": "sls logs --function express --tail",

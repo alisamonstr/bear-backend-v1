@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 import passport from 'passport'
 
 import jwtStrategry from '../utils/jwt'
-import { getBears } from './bears'
+import { getBears, updateBears, deleteBear } from './bears'
 
 const app = express()
 
@@ -26,6 +26,18 @@ app.get('/', (req, res) => {
 app.get('/bears', async (req, res) => {
   const bears = await getBears()
   res.send(bears)
+})
+
+app.post('/bears', async (req, res) => {
+  const updateBear = req.body
+  const result = await updateBears(updateBear)
+  res.send(result)
+})
+
+app.delete('/bears', async (req, res) => {
+  const deleteBearKey = req.body
+  const result = await deleteBear(deleteBearKey)
+  res.send(result)
 })
 
 app.post('/login', (req, res) => {
