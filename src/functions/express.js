@@ -45,7 +45,7 @@ app.post('/login', (req, res) => {
   if (email === process.env.EMAIL) {
     if (password === process.env.PASSWORD) { // the password compare would normally be done using bcrypt.
       const opts = {}
-      opts.expiresIn = 120 // token expires in 2min
+      opts.expiresIn = 60 * 60 * 4 // token expires in 4 hours
       const secret = process.env.SECRET // normally stored in process.env.secret
       const token = jwt.sign({ email }, secret, opts)
       return res.status(200)
