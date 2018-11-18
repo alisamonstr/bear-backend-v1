@@ -26,9 +26,8 @@ export const updateBears = async (bear) => {
     TableName: 'bears-store',
     Item: bear,
   }
-  const result = await documentClient.put(params)
+  await documentClient.put(params)
     .promise()
-  console.log(result)
   return bear
 }
 

@@ -28,13 +28,13 @@ app.get('/bears', async (req, res) => {
   res.send(bears)
 })
 
-app.post('/bears', async (req, res) => {
+app.post('/bears', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const updateBear = req.body
   const result = await updateBears(updateBear)
   res.send(result)
 })
 
-app.delete('/bears', async (req, res) => {
+app.delete('/bears', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const deleteBearKey = req.body
   const result = await deleteBear(deleteBearKey)
   res.send(result)
