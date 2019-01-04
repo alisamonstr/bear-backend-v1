@@ -22,6 +22,11 @@ provider:
         - "dynamodb:DeleteItem"
       Resource:
         - "arn:aws:dynamodb:eu-central-1:150221128062:table/bears-store"
+    - Effect: "Allow"
+      Action:
+        - "ses:SendEmail"
+      Resource:
+        - "*"
 
 custom:
   webpackIncludeModules: true
