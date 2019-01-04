@@ -6,6 +6,7 @@ import passport from 'passport'
 
 import jwtStrategry from '../utils/jwt'
 import { getBears, updateBears, deleteBear } from './bears'
+import { sendEmail } from './send-email'
 
 const app = express()
 
@@ -18,6 +19,11 @@ app.use((req, res, next) => {
 })
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+app.post('/send-email', async (req, res) => {
+  const email = await sendEmail(req.body)
+  res.send(email)
+})
 
 app.get('/', (req, res) => {
   res.send('hello express server')
