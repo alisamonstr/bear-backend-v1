@@ -2,7 +2,7 @@ service: bear-store
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   memorySize: 256
   stage: prod
   region: eu-central-1
@@ -21,7 +21,7 @@ provider:
         - "dynamodb:UpdateItem"
         - "dynamodb:DeleteItem"
       Resource:
-        - "arn:aws:dynamodb:eu-central-1:150221128062:table/bears-store"
+        - "arn:aws:dynamodb:*:*:table/bears-table"
     - Effect: "Allow"
       Action:
         - "ses:SendEmail"
@@ -74,4 +74,7 @@ functions:
 plugins:
   - serverless-webpack
   - serverless-offline
+
+resources:
+  ${file(resources.yml)}
 

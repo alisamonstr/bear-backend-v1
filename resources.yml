@@ -1,0 +1,32 @@
+Resources:
+  BearsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: bears-table
+      AttributeDefinitions:
+        - AttributeName: bearId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: bearId
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  DynamoDBIamPolicy:
+    Type: AWS::IAM::Policy
+    DependsOn:
+      - BearsTable
+    Properties:
+      PolicyName: lambda-dynamodb
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:GetItem
+              - dynamodb:PutItem
+              - dynamodb:UpdateItem
+              - dynamodb:DeleteItem
+            Resource:
+              - arn:aws:dynamodb:*:*:table/bears-table
+      Roles:
+        - Ref: IamRoleLambdaExecution
