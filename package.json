@@ -36,7 +36,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.3.0",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.19",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0"
   },
